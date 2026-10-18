@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#e94f9b">
+  <meta name="description" content="Sistem Pendukung Keputusan untuk simulasi klasifikasi risiko diabetes menggunakan metode K-Nearest Neighbors (KNN).">
+  <title>Sistem Pendukung Keputusan Risiko Diabetes</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">SPK Risiko Diabetes</div>
+      <div class="tag">Sistem Pendukung Keputusan · Metode KNN</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">SPK KESEHATAN</span>
+        <h1>Prediksi Risiko Diabetes</h1>
+        <p>Masukkan data pasien untuk melihat perkiraan kategori risiko berdasarkan metode <b>K-Nearest Neighbors (KNN)</b>. Website ini responsif dan dapat dibuka melalui HP maupun laptop.</p>
+      </div>
+      <div class="hero-art">
+        <div class="medical-icon">✚</div>
+        <strong>Sistem Pendukung Keputusan</strong>
+        <small>Hasil hanya simulasi pembelajaran dan bukan diagnosis medis.</small>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Data Pasien</h2>
+        <p class="sub">Isi data pasien. Gunakan titik untuk angka desimal BMI.</p>
+        <form id="patientForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="age">Usia (tahun)</label>
+              <input id="age" name="age" type="number" min="1" max="120" value="42" required>
+            </div>
+            <div class="field">
+              <label for="bmi">BMI</label>
+              <input id="bmi" name="bmi" type="number" min="10" max="80" step="0.1" value="28.5" required>
+            </div>
+            <div class="field">
+              <label for="glucose">Glukosa (mg/dL)</label>
+              <input id="glucose" name="glucose" type="number" min="20" max="600" value="130" required>
+            </div>
+            <div class="field">
+              <label for="bp">Tekanan darah (mmHg)</label>
+              <input id="bp" name="bp" type="number" min="30" max="300" value="128" required>
+            </div>
+            <div class="field full">
+              <label for="family">Riwayat diabetes dalam keluarga</label>
+              <select id="family" name="family" required>
+                <option value="0">Tidak ada</option>
+                <option value="1" selected>Ada</option>
+              </select>
+              <span class="hint">0 = tidak ada · 1 = ada</span>
+            </div>
+          </div>
+          <button type="submit">Hitung Prediksi Risiko</button>
+          <button type="button" class="secondary" id="resetBtn">Kembalikan Data Contoh</button>
+        </form>
+      </div>
+
+      <div class="right-column">
+        <div class="card">
+          <h2>Hasil Prediksi</h2>
+          <p class="sub">Sistem mengambil 3 data pasien terdekat (K = 3).</p>
+          <div id="result" class="result-box empty" aria-live="polite">
+            <div class="result-icon">●</div>
+            <b>Hasil akan muncul di sini</b>
+            <span class="result-note">Tekan tombol “Hitung Prediksi Risiko”.</span>
+          </div>
+          <div class="metric">
+            <div><small>Nilai K</small><strong>3 tetangga</strong></div>
+            <div><small>Metode</small><strong>KNN</strong></div>
+          </div>
+        </div>
+
+        <div class="card steps">
+          <h3>Bagaimana cara kerjanya?</h3>
+          <div class="step"><span class="num">1</span><span>Sistem membaca lima atribut masukan pasien.</span></div>
+          <div class="step"><span class="num">2</span><span>Nilai dinormalisasi menggunakan rentang data contoh.</span></div>
+          <div class="step"><span class="num">3</span><span>Sistem menghitung jarak Euclidean dan memilih 3 tetangga terdekat.</span></div>
+          <div class="step"><span class="num">4</span><span>Kategori terbanyak dari tetangga tersebut menjadi hasil prediksi.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card details">
+      <details>
+        <summary>Dataset contoh dan catatan metode</summary>
+        <p>Data pelatihan terdiri dari 10 pasien contoh dengan label Risiko Rendah atau Risiko Tinggi. Lima atribut yang digunakan adalah usia, BMI, glukosa, tekanan darah, dan riwayat diabetes dalam keluarga. Dataset juga disediakan pada folder <code>data</code>.</p>
+        <p>Nilai numerik dinormalisasi dengan min–max berdasarkan rentang dataset contoh. Jarak dihitung menggunakan Euclidean, lalu label mayoritas dari K = 3 tetangga terdekat dipilih sebagai hasil.</p>
+        <p><b>Penting:</b> Ini merupakan simulasi tugas kuliah dengan dataset kecil, bukan alat diagnosis medis. Hasil tidak menggantikan pemeriksaan dokter atau laboratorium.</p>
+      </details>
+    </section>
+  </main>
+  <footer>Proyek tugas kuliah · Sistem Pendukung Keputusan dengan KNN<br>HTML, CSS, dan JavaScript · Responsif untuk HP dan desktop</footer>
+</body>
+</html>
